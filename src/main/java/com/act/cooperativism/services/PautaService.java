@@ -1,6 +1,7 @@
 package com.act.cooperativism.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,15 @@ public class PautaService {
 		return repository.findAll();
 	}
 
-	public Pauta cadastra(Pauta pauta) {
+	public Pauta cadastrar(Pauta entity) {
 		LOG.info("Cadastrando uma nova pautas");
-		return repository.save(pauta);
+		return repository.save(entity);
+	}
+
+	public Pauta obterPauta(Long id) {
+		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
+		Optional<Pauta> obj = repository.findById(id);
+		return obj.orElse(null);
 	}
 	
 
