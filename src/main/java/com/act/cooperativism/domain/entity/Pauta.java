@@ -22,8 +22,5 @@ public class Pauta implements Serializable {
 	
 	@Column(nullable = false)
 	private String nome;
-	
-//	@OneToMany
-//	private Sessao sessao;
 
 }
