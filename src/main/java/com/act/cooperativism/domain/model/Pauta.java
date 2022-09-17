@@ -1,6 +1,4 @@
-package com.act.cooperativism.model;
-
-import java.time.Duration;
+package com.act.cooperativism.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +10,15 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Sessao {
+public class Pauta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private Duration tempoVotacao = Duration.parse("PT1M");
+	private String nome;
+		
+//	private Sessao sessao;
 
 }
