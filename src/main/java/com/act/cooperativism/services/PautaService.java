@@ -28,6 +28,5 @@ public class PautaService {
 		return repository.save(pauta);
 	}
 	
-	
 
 }
