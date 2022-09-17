@@ -1,4 +1,6 @@
-package com.act.cooperativism.domain.model;
+package com.act.cooperativism.domain.entity;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,9 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Pauta {
+public class Associado implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +22,7 @@ public class Pauta {
 	
 	@Column(nullable = false)
 	private String nome;
-		
-//	private Sessao sessao;
-
+	
+	@Column(nullable = false)
+	private String cpf;
 }
