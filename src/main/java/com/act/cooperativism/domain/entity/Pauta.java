@@ -1,6 +1,6 @@
-package com.act.cooperativism.domain.model;
+package com.act.cooperativism.domain.entity;
 
-import java.time.Duration;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +12,18 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Sessao {
+public class Pauta implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private Duration tempoVotacao = Duration.parse("PT1M");
+	private String nome;
+	
+//	@OneToMany
+//	private Sessao sessao;
 
 }

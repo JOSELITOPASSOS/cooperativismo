@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.act.cooperativism.domain.model.Pauta;
+import com.act.cooperativism.domain.entity.Pauta;
 import com.act.cooperativism.services.PautaService;
 
 /**
