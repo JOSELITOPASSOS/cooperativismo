@@ -28,11 +28,11 @@ public class Voto implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "associado_id")
+	@JoinColumn(name = "associado")
 	private Associado associado;
 	
 	@ManyToOne
-	@JoinColumn(name = "sessao_id")
+	@JoinColumn(name = "sessao")
 	private SessaoVotacao sessaoVotacao; 
 
 	@Column(nullable = false)

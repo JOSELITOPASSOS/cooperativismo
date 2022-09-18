@@ -34,5 +34,14 @@ public class VotoService {
 		Optional<Voto> obj = repository.findById(id);
 		return obj.orElse(null);
 	}
+	
+	public List<Voto> registrarEmlote(List<Voto> lote) {
+		return this.repository.saveAll(lote);
+	}
+
+	public Voto registrar(Voto entity) {
+		LOG.info("Registrando voto.");
+		return repository.save(entity);
+	}
 
 }
