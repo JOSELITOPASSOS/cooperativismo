@@ -13,34 +13,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.act.cooperativism.domain.entity.SessaoVotacao;
-import com.act.cooperativism.services.SessaoVotacaoService;
+import com.act.cooperativism.domain.entity.Associado;
+import com.act.cooperativism.domain.services.AssociadoService;
 
 @RestController
-@RequestMapping("/sessoes")
-public class SessaoVotacaoResource {
+@RequestMapping("/associados")
+public class AssociadoResouce {
 
 	@Autowired
-	private SessaoVotacaoService service;
+	private AssociadoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<SessaoVotacao>> listar() {
-		var lista = service.listar();
-		return ResponseEntity.ok().body(lista);
+	public ResponseEntity<List<Associado>> listar() {
+		return ResponseEntity.ok().body(this.service.listar() );
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<SessaoVotacao> obterSessao(@PathVariable Long id) {
-		var obj = service.obterSessao(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Associado> obterPauta(@PathVariable Long id) {
+		return ResponseEntity.ok().body(this.service.obterAssociado(id) );
 	}
 	
 	@PostMapping
-	public ResponseEntity<SessaoVotacao> abrirSessao(@RequestBody SessaoVotacao entity) {
-		var obj = this.service.abrirSessao(entity);
+	public ResponseEntity<Associado> cadastrarAssociado(@RequestBody Associado entity) {
+		var obj = this.service.cadastrar(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(obj);
+	}
+	
+	@GetMapping(value = "/{id}/validar/{cpf}")
+	public ResponseEntity<Object> verificarAssociado(@PathVariable String cpf) {
+		return ResponseEntity.ok().body(this.service.verificar(cpf) );
 	}
 }
