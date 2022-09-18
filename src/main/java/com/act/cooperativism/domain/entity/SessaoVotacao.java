@@ -12,12 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
+@Builder
 public class SessaoVotacao implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -25,19 +27,30 @@ public class SessaoVotacao implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String descricao;
+	private LocalDateTime dataInicio;
 	
 	@Column(nullable = false)
-	private LocalDateTime dataFinalizar;
+	private LocalDateTime dataFim;
 	
+	@Builder.Default
 	@Column(nullable = false)
 	private Duration duracao = Duration.parse("PT1M");
 	
+	@Builder.Default
 	@Column(nullable = false)
 	private Boolean finalizada = false;
 	
 	@ManyToOne
 	@JoinColumn(name = "pauta_id")
 	private Pauta pauta;
-
+	
+	public void setDataFim(LocalDateTime dataFim) {
+		this.dataFim = this.gerarDataFim(this.dataInicio, this.duracao);
+	}
+	
+	private LocalDateTime gerarDataFim(LocalDateTime dataInicio, Duration duracao) {
+		var temp = getDataInicio();
+		var minutes = duracao.toMinutes(); 
+		return temp.plusMinutes(minutes);
+	}
 }

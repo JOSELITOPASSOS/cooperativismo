@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.act.cooperativism.domain.entity.SessaoVotacao;
-import com.act.cooperativism.repository.SessaoVotacaoRepository;
+import com.act.cooperativism.domain.repository.SessaoVotacaoRepository;
 
 @Service
 public class SessaoVotacaoService {
