@@ -1,6 +1,7 @@
 package com.act.cooperativism.domain.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +24,12 @@ public class Pauta implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String nome;
+	private String descricao;
+	
+	@Column(nullable = false)
+	private LocalDateTime data;
+	
+	@Column(nullable = true)
+	private Boolean aprovada;
 
 }

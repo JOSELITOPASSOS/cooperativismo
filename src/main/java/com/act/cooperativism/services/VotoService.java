@@ -1,4 +1,4 @@
-package com.act.cooperativism.domain.services;
+package com.act.cooperativism.services;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.act.cooperativism.repository;
+package com.act.cooperativism.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

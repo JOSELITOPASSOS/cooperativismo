@@ -27,9 +27,6 @@ public class SessaoVotacao implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String descricao;
-	
-	@Column(nullable = false)
 	private LocalDateTime dataInicio;
 	
 	@Column(nullable = false)

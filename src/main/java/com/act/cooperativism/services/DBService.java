@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.act.cooperativism.domain.entity.Associado;
 import com.act.cooperativism.domain.entity.Pauta;
 import com.act.cooperativism.domain.entity.SessaoVotacao;
-import com.act.cooperativism.domain.services.AssociadoService;
 
 @Service
 public class DBService {
@@ -48,11 +47,10 @@ public class DBService {
 	}
 
 	private SessaoVotacao novaSessao(Pauta pauta) {
-		var sessao = SessaoVotacao.builder()
-				.descricao("Teste de votação")
-				.dataInicio(LocalDateTime.now())
-				.pauta(pauta)
+		var sessao = SessaoVotacao.builder()				
+				.dataInicio(LocalDateTime.now())				
 				.dataFim(LocalDateTime.now())
+				.pauta(pauta)
 				.build();
 
 		return sessao;
@@ -60,7 +58,9 @@ public class DBService {
 
 	private Pauta novaPauta() {
 		var pauta = Pauta.builder()
-				.nome("Pauta Teste")
+				.descricao("Teste de votação")
+				.data(LocalDateTime.now())
+				.aprovada(true)
 				.build();
 
 		return pauta;

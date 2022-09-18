@@ -1,4 +1,4 @@
-package com.act.cooperativism.domain.resources;
+package com.act.cooperativism.resources;
 
 import java.net.URI;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.act.cooperativism.domain.entity.Associado;
-import com.act.cooperativism.domain.services.AssociadoService;
+import com.act.cooperativism.services.AssociadoService;
 
 @RestController
 @RequestMapping("/associados")

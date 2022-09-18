@@ -1,4 +1,4 @@
-package com.act.cooperativism.domain.resources;
+package com.act.cooperativism.resources;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.act.cooperativism.domain.entity.Voto;
-import com.act.cooperativism.domain.services.VotoService;
+import com.act.cooperativism.services.VotoService;
 
 @RestController
 @RequestMapping("/votos")
