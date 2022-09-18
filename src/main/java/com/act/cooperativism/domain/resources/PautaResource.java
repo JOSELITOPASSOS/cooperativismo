@@ -30,7 +30,7 @@ public class PautaResource {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Pauta> obterPauta(@PathVariable Long id) {
-		return ResponseEntity.ok().body(this.service.obterPauta(id) );
+		return ResponseEntity.ok().body(this.service.obter(id) );
 	}
 	
 	@PostMapping

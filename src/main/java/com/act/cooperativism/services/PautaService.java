@@ -29,7 +29,7 @@ public class PautaService {
 		return repository.save(entity);
 	}
 
-	public Pauta obterPauta(Long id) {
+	public Pauta obter(Long id) {
 		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
 		Optional<Pauta> obj = repository.findById(id);
 		return obj.orElse(null);
