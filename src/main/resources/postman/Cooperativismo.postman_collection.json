@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "357b72f9-24d2-4bf9-b200-9e22c9dcb6f5",
+		"name": "Cooperativismo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/pautas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pautas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pautas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/pautas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"Teste 02\",\r\n    \"data\": \"2022-09-18T00:00:00\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pautas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pautas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/pautas/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pautas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pautas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sessoes/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/sessoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-info.herokuapp.com/users/{cpf}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://user-info.herokuapp.com/users/19839091069",
+					"protocol": "https",
+					"host": [
+						"user-info",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"19839091069"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/associados",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Associado Teste 11\",\r\n    \"cpf\": \"57799316071\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/associados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"associados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/votos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"opcao\": false,\r\n    \"associado\": {\r\n       \"id\": 11\r\n    },\r\n    \"sessaoVotacao\": {\r\n        \"id\": 2\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/votos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"votos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/{id}/validar/{cpf}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/associados/1/validar/19839091069",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"associados",
+						"1",
+						"validar",
+						"19839091069"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/associados/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Associado Teste 01\",\r\n    \"cpf\": \"15530163009\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/associados/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"associados",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/votos/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/votos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"votos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sessoes",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"dataInicio\": \"2022-09-19T18:05:00\",\r\n    \"dataFim\": \"2022-09-19T18:10:00\",\r\n    \"finalizada\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sessoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sessoes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataInicio\": \"2022-09-19T18:05:00\",\r\n    \"dataFim\": \"2022-09-19T18:10:00\",\r\n    \"duracao\": \"PT5M\",\r\n    \"pauta\": {\r\n        \"id\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sessoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/pautas/resultado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"descricao\": \"Teste 02\",\r\n    \"data\": \"2022-09-18T00:00:00\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pautas/resultado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pautas",
+						"resultado"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
