@@ -2,19 +2,19 @@ package com.act.cooperativism.domain.entity;
 
 public enum VotoEnum {
 	
-	SIM(1, "Sim"),
-	NAO(0, "Não");
+	SIM(true, "Sim"),
+	NAO(false, "Não");
 
-	private final int id;
+	private final Boolean opcao;
 	private final String descricao;
 	
-	VotoEnum(int id, String descricao) {
-		this.id = id;
+	VotoEnum(Boolean opcao, String descricao) {
+		this.opcao = opcao;
 		this.descricao = descricao;
 	}
 	
-	public int getId() {
-		return id;
+	public Boolean getOpcao() {
+		return opcao;
 	}
 
 	public String getDescricao() {

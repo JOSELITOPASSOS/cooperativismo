@@ -13,12 +13,16 @@ import javax.persistence.ManyToOne;
 
 import com.act.cooperativism.domain.converter.BooleanSimNaoConverter;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Voto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,11 +32,11 @@ public class Voto implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "associado")
+	@JoinColumn(name = "associado", nullable = false)
 	private Associado associado;
 	
 	@ManyToOne
-	@JoinColumn(name = "sessao")
+	@JoinColumn(name = "sessao_id", nullable = false)
 	private SessaoVotacao sessaoVotacao; 
 
 	@Column(nullable = false)

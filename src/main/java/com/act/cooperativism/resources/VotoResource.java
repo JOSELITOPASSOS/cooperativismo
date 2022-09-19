@@ -36,16 +36,16 @@ public class VotoResource {
 	}
 	
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Voto> registrarVoto(@RequestBody Voto entity) {
+	public ResponseEntity<Voto> registrarVoto(@RequestBody Voto entity) throws Exception {
 		var obj = this.service.registrar(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
+
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
 	@PostMapping("/lote")
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<List<Voto>> registrarVotoEmLote(@RequestBody List<Voto> lote) {
 		var obj = this.service.registrarEmlote(lote);
 		return ResponseEntity.ok().body(obj);
