@@ -25,7 +25,7 @@ public class PautaService {
 	private VotoService votoService;
 
 	public List<Pauta> listar() {
-		LOG.info("listantando todas as pautas");
+		LOG.info("listando todas as pautas");
 		return repository.findAll();
 	}
 
@@ -35,9 +35,9 @@ public class PautaService {
 	}
 
 	public Pauta obter(Long id) {
-		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
+		LOG.info("Obtendo uma pauta pelo id.");
 		Optional<Pauta> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new NotFoundException("Associado não encontrado."));
+		return obj.orElseThrow(() -> new NotFoundException("Pauta não encontrada."));
 	}
 
 	public Pauta resultadoVotacao(Pauta entity) {
@@ -51,9 +51,12 @@ public class PautaService {
 		return resultato;
 	}
 
-	private List<Number> contarVotos(Pauta pautaId) {
+	private List<Number> contarVotos(Pauta pauta) {
+		
+		var entity = obter(pauta.getId());
+
 		LOG.info("Contabilizando votos.");
-		var votos = votoService.listarVotosPorPauta(pautaId.getId());
+		var votos = votoService.listarVotosPorPauta(pauta.getId());
 		long sim = votos.stream()
 				.filter(v -> v.getOpcao().booleanValue())
 				.count();

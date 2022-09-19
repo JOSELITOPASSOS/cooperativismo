@@ -31,7 +31,7 @@ public class VotoService {
 	private AssociadoService associadoService;
 	
 	public List<Voto> listar() {
-		LOG.info("Listantando todos os votos");
+		LOG.info("Listando todos os votos");
 		return repository.findAll();
 	}
 
@@ -81,7 +81,7 @@ public class VotoService {
 		if(Objects.isNull(entity.getSessaoVotacao())) {
 			 throw new BadRequestException("Sessão não informada.");
 		}
-		var sessao = sessaoService.obterSessao(entity.getSessaoVotacao().getId());
+		var sessao = sessaoService.obter(entity.getSessaoVotacao().getId());
 		
 		if(sessao.getFinalizada()) {
 			throw new UnprocessableEntityException("Sessão encerrada.");

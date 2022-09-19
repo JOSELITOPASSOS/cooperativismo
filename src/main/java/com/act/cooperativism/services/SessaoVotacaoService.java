@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.act.cooperativism.domain.entity.SessaoVotacao;
 import com.act.cooperativism.domain.repository.SessaoVotacaoRepository;
 import com.act.cooperativism.exception.BadRequestException;
-import com.act.cooperativism.exception.NotFoundException;
 
 @Service
 public class SessaoVotacaoService {
@@ -22,28 +21,23 @@ public class SessaoVotacaoService {
 	private SessaoVotacaoRepository repository;
 
 	public List<SessaoVotacao> listar() {
-		LOG.info("Listantando todas as pautas");
+		LOG.info("Listando todas as sessões de votação");
 		return repository.findAll();
 	}
 	
-	public SessaoVotacao obterSessao(Long id) {
-		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
+	public SessaoVotacao obter(Long id) {
+		LOG.info("Obtendo uma sessão de votação pelo id.");
 		Optional<SessaoVotacao> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new BadRequestException("Associado não encontrado."));
+		return obj.orElseThrow(() -> new BadRequestException("Sessão de votação não encontrada."));
 	}
 
 	public SessaoVotacao abrir(SessaoVotacao entity) {
-		LOG.info("Abrindo uma nova sessão");
-		return repository.save(entity);
-	}
-
-	public SessaoVotacao abrirSessao(SessaoVotacao entity) {
-		LOG.info("Abindo nova Sessão.");
+		LOG.info("Abrindo uma nova sessão de votação");
 		return repository.save(entity);
 	}
 
 	public SessaoVotacao encerra(SessaoVotacao entity) {
-		LOG.info("Encerrando sessão");
+		LOG.info("Encerrando sessão de votação.");
 		return repository.saveAndFlush(entity);
 	}
 
