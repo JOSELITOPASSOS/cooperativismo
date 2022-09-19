@@ -27,3 +27,11 @@ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-ma
 ```
  \src\main\resources\postman
 ```
+### Acessar banco em memoria H2
+```
+ URL: http://localhost:8080/h2
+ JDBC URL: jdbc:h2:mem:testdb
+ User Name: sa
+ Password: Em brando
+```
+![img_1.png](src/main/resources/imagens/img_1.png)
