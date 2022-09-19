@@ -40,9 +40,12 @@ public class PautaService {
 		return obj.orElseThrow(() -> new NotFoundException("Pauta não encontrada."));
 	}
 
-	public Pauta resultadoVotacao(Pauta entity) {
+	public Pauta resultadoVotacao(Pauta pauta) {
+		LOG.info("Buscando Pauta");
+		var entity = obter(pauta.getId());
+		
 		LOG.info("Registrando resultado da votação na pauta.");
-		var totais = contarVotos(entity);
+		var totais = contarVotos(pauta);
 		var sim = totais.get(1).longValue();
 		var nao = totais.get(2).longValue();
 		
@@ -52,11 +55,8 @@ public class PautaService {
 	}
 
 	private List<Number> contarVotos(Pauta pauta) {
-		LOG.info("Buscando Pauta");
-		var entity = obter(pauta.getId());
-
 		LOG.info("Contabilizando votos.");
-		var votos = votoService.listarVotosPorPauta(entity.getId());
+		var votos = votoService.listarVotosPorPauta(pauta.getId());
 		long sim = votos.stream()
 				.filter(v -> v.getOpcao().booleanValue())
 				.count();
