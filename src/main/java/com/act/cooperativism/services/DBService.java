@@ -39,10 +39,10 @@ public class DBService {
 		var pauta = novaPauta();
 		pautaService.cadastrar(pauta);
 
-		var sessao01 = novaSessao(pauta);
+		var sessao01 = novaSessao(pauta, false);
 		sessaoService.abrir(sessao01);
 		
-		var sessao02 = novaSessao(pauta);
+		var sessao02 = novaSessao(pauta, true);
 		sessaoService.abrir(sessao02);
 
 		var teste01 = novoAssociado("19839091069", "Associado Teste 01");
@@ -108,12 +108,13 @@ public class DBService {
 		return associado;
 	}
 
-	private SessaoVotacao novaSessao(Pauta pauta) {
+	private SessaoVotacao novaSessao(Pauta pauta, Boolean status) {
 		var sessao = SessaoVotacao.builder()
 				.dataInicio(LocalDateTime.now().plusHours(2))
 				.dataFim(LocalDateTime.now())
 				.duracao(Duration.parse("PT30M"))
 				.pauta(pauta)
+				.finalizada(status)
 				.build();
 		return sessao;
 	}

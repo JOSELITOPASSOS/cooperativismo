@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.act.cooperativism.domain.entity.Pauta;
 import com.act.cooperativism.domain.repository.PautaRepository;
+import com.act.cooperativism.exception.NotFoundException;
 
 @Service
 public class PautaService {
@@ -36,7 +37,7 @@ public class PautaService {
 	public Pauta obter(Long id) {
 		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
 		Optional<Pauta> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new NotFoundException("Associado não encontrado."));
 	}
 
 	public Pauta resultadoVotacao(Pauta entity) {

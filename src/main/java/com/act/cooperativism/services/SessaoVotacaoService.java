@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.act.cooperativism.domain.entity.SessaoVotacao;
 import com.act.cooperativism.domain.repository.SessaoVotacaoRepository;
+import com.act.cooperativism.exception.BadRequestException;
+import com.act.cooperativism.exception.NotFoundException;
 
 @Service
 public class SessaoVotacaoService {
@@ -27,7 +29,7 @@ public class SessaoVotacaoService {
 	public SessaoVotacao obterSessao(Long id) {
 		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
 		Optional<SessaoVotacao> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new BadRequestException("Associado não encontrado."));
 	}
 
 	public SessaoVotacao abrir(SessaoVotacao entity) {
