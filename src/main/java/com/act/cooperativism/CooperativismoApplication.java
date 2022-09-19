@@ -13,7 +13,7 @@ public class CooperativismoApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {		
-		System.out.println("\n\n\t\t #####		INICIANDO		#####\n\n");		
+		
 	}
 
 }
