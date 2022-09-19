@@ -30,7 +30,7 @@ public class AssociadoResouce {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Associado> obterPauta(@PathVariable Long id) {
-		return ResponseEntity.ok().body(this.service.obterAssociado(id) );
+		return ResponseEntity.ok().body(this.service.obter(id) );
 	}
 	
 	@PostMapping

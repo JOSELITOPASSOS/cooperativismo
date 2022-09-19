@@ -2,6 +2,7 @@ package com.act.cooperativism.services;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.act.cooperativism.domain.entity.Associado;
 import com.act.cooperativism.domain.repository.AssociadoRepository;
-import com.act.cooperativism.exception.ObjectNotFoundException;
+import com.act.cooperativism.exception.BadRequestException;
+import com.act.cooperativism.exception.NotFoundException;
+import com.act.cooperativism.exception.UnprocessableEntityException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -30,10 +33,10 @@ public class AssociadoService {
 		return repository.findAll();
 	}
 
-	public Associado obterAssociado(Long id) {
+	public Associado obter(Long id) {
 		LOG.info("Obtendo Associado pelo id.");
 		Optional<Associado> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Associado não encontrado."));
+		return obj.orElseThrow(() -> new NotFoundException("Associado não encontrado."));
 	}
 
 	public Associado cadastrar(Associado entity) {
@@ -55,7 +58,7 @@ public class AssociadoService {
 		} catch (Exception e) {
 			LOG.error(e.getLocalizedMessage());
 			e.printStackTrace();
-			return null;
+			throw null;
 		}		
 
 	}
@@ -63,11 +66,15 @@ public class AssociadoService {
 	@SuppressWarnings("unchecked")
 	public Associado podeVotar(Associado associado) throws Exception {
 		LOG.info("Cadastrando novo associado.");
-		var habilitado = obterAssociado(associado.getId());
+		
+		if(Objects.isNull(associado.getId())) {
+		   throw new BadRequestException("Associado não informado.");
+		}
+		var habilitado = obter(associado.getId());
 		
 		var status = (HashMap<String, String>) associadoHabilitado(habilitado.getCpf());
 		if(status.containsValue("UNABLE_TO_VOTE")) {
-			throw new Exception("Associado não habilitado para votar.");
+			throw new UnprocessableEntityException("Associado não habilitado para votar.");
 		}
 		
 		return habilitado;

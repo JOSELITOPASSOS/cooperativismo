@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import com.act.cooperativism.domain.entity.SessaoVotacao;
 import com.act.cooperativism.domain.entity.Voto;
 import com.act.cooperativism.domain.repository.VotoRepository;
+import com.act.cooperativism.exception.BadRequestException;
+import com.act.cooperativism.exception.NotFoundException;
+import com.act.cooperativism.exception.UnprocessableEntityException;
 
 @Service
 public class VotoService {
@@ -35,7 +38,7 @@ public class VotoService {
 	public Voto obter(Long id) {
 		LOG.info("Obtendo uma Sessão de Vaotação pelo id.");
 		Optional<Voto> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new NotFoundException("Associado não encontrado."));
 	}
 	
 	public List<Voto> registrarEmlote(List<Voto> lote) {
@@ -60,7 +63,7 @@ public class VotoService {
 		voto.setSessaoVotacao(sessao);
 		
 		if(Objects.isNull(voto.getAssociado())) {
-		   throw new Exception("Associado não informado.");
+		   throw new BadRequestException("Associado não informado.");
 		}
 		
 		var associado = associadoService.podeVotar(voto.getAssociado());
@@ -68,7 +71,7 @@ public class VotoService {
 
 		var qtd = repository.verificarSeVotou(associado.getId(), sessao.getPauta().getId());
 		if(qtd > 0) {
-		   throw new Exception("Associado já registrou voto para essa pauta.");
+		   throw new UnprocessableEntityException("Associado já registrou voto para essa pauta.");
 		}
 		
 		return voto;
@@ -76,12 +79,12 @@ public class VotoService {
 
 	private SessaoVotacao validarSessao(Voto entity) throws Exception {
 		if(Objects.isNull(entity.getSessaoVotacao())) {
-			throw new Exception("Sessão não informada.");
+			 throw new BadRequestException("Sessão não informada.");
 		}
 		var sessao = sessaoService.obterSessao(entity.getSessaoVotacao().getId());
 		
 		if(sessao.getFinalizada()) {
-			throw new Exception("Sessão encerrada.");
+			throw new UnprocessableEntityException("Sessão encerrada.");
 		}
 		return sessao;
 	}
