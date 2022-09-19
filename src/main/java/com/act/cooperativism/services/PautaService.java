@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.act.cooperativism.configuration.RabbitMQConfig;
 import com.act.cooperativism.domain.entity.Pauta;
 import com.act.cooperativism.domain.repository.PautaRepository;
 import com.act.cooperativism.exception.NotFoundException;
@@ -23,6 +25,12 @@ public class PautaService {
 
 	@Autowired
 	private VotoService votoService;
+	
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private RabbitMQConfig rabbitMQConfig;
 
 	public List<Pauta> listar() {
 		LOG.info("listando todas as pautas");
@@ -51,6 +59,10 @@ public class PautaService {
 		
 		entity.setAprovada(sim > nao);
 		var resultato = repository.saveAndFlush(entity);
+		
+		//Envia o resultodo pro rabbit
+		this.enviarResultadoVotacaoParaFila(entity);
+		
 		return resultato;
 	}
 
@@ -65,9 +77,8 @@ public class PautaService {
 		return  Arrays.asList(votos.size(), sim, nao);
 	}
 	
-//	public void enviarResultadoVotacaoParaFila() {
-//		Pauta pauta = repository.findById(Long.valueOf(1)).orElseThrow();
-//		rabbitTemplate.convertAndSend(rabbitMQConfig.getExchange(), rabbitMQConfig.getRoutingkey(), pauta);
-//	}
+	private void enviarResultadoVotacaoParaFila(Pauta pauta) {
+		rabbitTemplate.convertAndSend(rabbitMQConfig.getNomeIntercambio(), rabbitMQConfig.getIdRota(), pauta);
+	}
 	
 }
