@@ -16,24 +16,4 @@ class AssociadoServiceTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testObter() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testCadastrar() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testAssociadoHabilitado() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPodeVotar() {
-		fail("Not yet implemented");
-	}
-
 }
