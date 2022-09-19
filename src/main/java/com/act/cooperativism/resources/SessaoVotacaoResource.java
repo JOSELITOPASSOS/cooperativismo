@@ -32,13 +32,13 @@ public class SessaoVotacaoResource {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<SessaoVotacao> obterSessao(@PathVariable Long id) {
-		var obj = service.obterSessao(id);
+		var obj = service.obter(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
 	public ResponseEntity<SessaoVotacao> abrirSessao(@RequestBody SessaoVotacao entity) {
-		var obj = this.service.abrirSessao(entity);
+		var obj = this.service.abrir(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		

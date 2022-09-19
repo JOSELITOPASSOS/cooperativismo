@@ -29,12 +29,12 @@ public class AssociadoService {
 	private AssociadoRepository repository;
 
 	public List<Associado> listar() {
-		LOG.info("listantando todos associados");
+		LOG.info("listando todos associados");
 		return repository.findAll();
 	}
 
 	public Associado obter(Long id) {
-		LOG.info("Obtendo Associado pelo id.");
+		LOG.info("Obtendo associado pelo id.");
 		Optional<Associado> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new NotFoundException("Associado não encontrado."));
 	}
@@ -45,7 +45,7 @@ public class AssociadoService {
 	}
 
 	public Object associadoHabilitado(String cpf) {
-		LOG.info("Validar se Associado pode votar.");
+		LOG.info("Validar se associado pode votar.");
 		ObjectMapper mapper = new ObjectMapper();
 		try (CloseableHttpClient client = HttpClients.createDefault()) {
 			 HttpGet request = new HttpGet("https://user-info.herokuapp.com/users/" + cpf);
