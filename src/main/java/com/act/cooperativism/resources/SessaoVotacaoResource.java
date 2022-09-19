@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,16 @@ public class SessaoVotacaoResource {
 	@PostMapping
 	public ResponseEntity<SessaoVotacao> abrirSessao(@RequestBody SessaoVotacao entity) {
 		var obj = this.service.abrirSessao(entity);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		
+		return ResponseEntity.created(uri).body(obj);
+	}
+	
+	@PatchMapping
+	public ResponseEntity<SessaoVotacao> encerrarSessao(@RequestBody SessaoVotacao entity) {
+		entity.setFinalizada(true);
+		var obj = this.service.encerra(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		

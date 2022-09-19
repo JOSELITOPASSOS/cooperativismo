@@ -17,9 +17,8 @@ public class TestesRapidos {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		verificarDuration();
-		
-		
+		verificarDuration();
+
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
 		LocalDateTime dt1= LocalDateTime.parse("17-09-2022 09:00:00", f);

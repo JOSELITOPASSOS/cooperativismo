@@ -44,6 +44,6 @@ public class AssociadoResouce {
 	
 	@GetMapping(value = "/{id}/validar/{cpf}")
 	public ResponseEntity<Object> verificarAssociado(@PathVariable String cpf) {
-		return ResponseEntity.ok().body(this.service.verificar(cpf) );
+		return ResponseEntity.ok().body(this.service.associadoHabilitado(cpf) );
 	}
 }

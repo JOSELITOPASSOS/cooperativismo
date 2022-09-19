@@ -20,7 +20,7 @@ public class SessaoVotacaoService {
 	private SessaoVotacaoRepository repository;
 
 	public List<SessaoVotacao> listar() {
-		LOG.info("listantando todas as pautas");
+		LOG.info("Listantando todas as pautas");
 		return repository.findAll();
 	}
 	
@@ -38,6 +38,11 @@ public class SessaoVotacaoService {
 	public SessaoVotacao abrirSessao(SessaoVotacao entity) {
 		LOG.info("Abindo nova Sessão.");
 		return repository.save(entity);
+	}
+
+	public SessaoVotacao encerra(SessaoVotacao entity) {
+		LOG.info("Encerrando sessão");
+		return repository.saveAndFlush(entity);
 	}
 
 }

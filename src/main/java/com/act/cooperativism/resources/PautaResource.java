@@ -42,4 +42,9 @@ public class PautaResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 
+	@PostMapping("/resultado")
+	public ResponseEntity<Pauta> resultadoVotacao(@RequestBody Pauta entity) {
+		var obj = this.service.resultadoVotacao(entity);
+		return ResponseEntity.ok().body(obj);
+	}
 }

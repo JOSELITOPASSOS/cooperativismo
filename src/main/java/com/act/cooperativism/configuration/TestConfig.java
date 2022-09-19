@@ -1,7 +1,5 @@
 package com.act.cooperativism.configuration;
 
-import java.text.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +14,7 @@ public class TestConfig {
 	private DBService dbService;
 	
 	@Bean
-	public boolean instancia() throws ParseException {
+	public boolean instancia() throws Exception {
 		this.dbService.instanciaBaseDeDados();
 		return true;
 	}

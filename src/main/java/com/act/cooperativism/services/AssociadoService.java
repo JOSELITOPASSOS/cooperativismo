@@ -1,5 +1,6 @@
 package com.act.cooperativism.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.act.cooperativism.domain.entity.Associado;
 import com.act.cooperativism.domain.repository.AssociadoRepository;
+import com.act.cooperativism.exception.ObjectNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -31,7 +33,7 @@ public class AssociadoService {
 	public Associado obterAssociado(Long id) {
 		LOG.info("Obtendo Associado pelo id.");
 		Optional<Associado> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Associado não encontrado."));
 	}
 
 	public Associado cadastrar(Associado entity) {
@@ -39,8 +41,8 @@ public class AssociadoService {
 		return repository.save(entity);
 	}
 
-	public Object verificar(String cpf) {
-
+	public Object associadoHabilitado(String cpf) {
+		LOG.info("Validar se Associado pode votar.");
 		ObjectMapper mapper = new ObjectMapper();
 		try (CloseableHttpClient client = HttpClients.createDefault()) {
 			 HttpGet request = new HttpGet("https://user-info.herokuapp.com/users/" + cpf);
@@ -58,4 +60,18 @@ public class AssociadoService {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	public Associado podeVotar(Associado associado) throws Exception {
+		LOG.info("Cadastrando novo associado.");
+		var habilitado = obterAssociado(associado.getId());
+		
+		var status = (HashMap<String, String>) associadoHabilitado(habilitado.getCpf());
+		if(status.containsValue("UNABLE_TO_VOTE")) {
+			throw new Exception("Associado não habilitado para votar.");
+		}
+		
+		return habilitado;
+			
+	}
+	
 }
