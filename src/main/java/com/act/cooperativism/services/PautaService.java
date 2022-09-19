@@ -52,11 +52,11 @@ public class PautaService {
 	}
 
 	private List<Number> contarVotos(Pauta pauta) {
-		
+		LOG.info("Buscando Pauta");
 		var entity = obter(pauta.getId());
 
 		LOG.info("Contabilizando votos.");
-		var votos = votoService.listarVotosPorPauta(pauta.getId());
+		var votos = votoService.listarVotosPorPauta(entity.getId());
 		long sim = votos.stream()
 				.filter(v -> v.getOpcao().booleanValue())
 				.count();
